@@ -4,6 +4,7 @@
   import Droplet from "./Droplet.svelte";
   import Gallery from "./Gallery.svelte";
   import List from "./List.svelte";
+  import Modal from "./Modal.svelte";
 
   if ($token != "") {
     fetch_images($endpoint, $token);
@@ -28,7 +29,6 @@
     on:click={toggle}
   />
   <nav>
-    <!-- <input id="rim" disabled placeholder="rim" size="3" /> -->
     <i class="fa-solid fa-camera-retro" />
 
     <span id="token">
@@ -42,6 +42,9 @@
   </nav>
 
   <div class="main">
+    <div class="center">
+      <Droplet />
+    </div>
     <div class="left">
       <Droplet />
       <List />
@@ -49,19 +52,8 @@
     <div class="right">
       <Gallery />
     </div>
+    <Modal />
   </div>
-
-  <!-- <div class="center">
-    <div>
-      <br />
-      <div>
-        <Droplet {token} />
-      </div>
-      <div style="height: 200px; width: 100%">
-        <Gallery {token} />
-      </div>
-    </div>
-  </div> -->
 </main>
 
 <style>
@@ -119,10 +111,10 @@
   .right {
     width: 100%;
   }
-  /* #rim {
-    margin-right: 1rem;
-    font-weight: 900;
-  } */
+
+  .center {
+    display: none;
+  }
 
   .fa-camera-retro {
     font-size: 1.8rem;
@@ -143,20 +135,13 @@
     font-weight: 700;
   }
 
-  /* div {
-    text-align: center;
+  @media only screen and (max-width: 700px) {
+    .left {
+      display: none;
+    }
+    .main,
+    .center {
+      display: block;
+    }
   }
-  input,
-  button {
-    margin: 10px;
-    font-size: larger;
-  }
-  .center {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-  } */
 </style>

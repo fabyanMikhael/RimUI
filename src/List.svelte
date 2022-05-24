@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { cdn_endpoint, images } from "./stores";
+  import { images, modal } from "./stores";
 </script>
 
 <ul>
   {#each $images as id}
-    <li><i class="fa-solid fa-image" /> {id}</li>
+    <li on:click={() => modal.set(id)}><i class="fa-solid fa-image" /> {id}</li>
   {/each}
 </ul>
 
@@ -26,6 +26,18 @@
     text-align: left;
     align-items: center;
     display: flex;
+    cursor: pointer;
+    transition: all 100ms;
+  }
+
+  li:hover {
+    background-color: var(--accent-color-hover);
+    transform: scale(1.05);
+  }
+
+  li:active {
+    background-color: var(--accent-color-active);
+    transform: scale(0.98);
   }
 
   .fa-image {

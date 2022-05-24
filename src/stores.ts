@@ -32,4 +32,4 @@ export function fetch_images(endpoint: string, token: String) {
 }
 
 
-
+export const modal = writable(null);
