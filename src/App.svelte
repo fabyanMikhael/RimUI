@@ -1,5 +1,6 @@
 <script lang="ts">
 import Droplet from "./Droplet.svelte";
+import Gallery from "./Gallery.svelte";
 
   let token: string = localStorage.getItem("UPLOAD_TOKEN") || "";
   $: {
@@ -10,9 +11,14 @@ import Droplet from "./Droplet.svelte";
 
 <div class="center">
     <div>
-      <input bind:value={token} type="password" placeholder="TOKEN">
+      <h2>Token: <input bind:value={token} type="password" placeholder="TOKEN"></h2>
       <br>
-      <Droplet {token}/>
+      <div>
+        <Droplet {token}/>
+      </div>
+      <div style="height: 200px; width: 100%">
+        <Gallery {token}/>
+      </div>
     </div>
 
 </div>

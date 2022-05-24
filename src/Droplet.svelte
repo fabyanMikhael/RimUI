@@ -12,6 +12,7 @@
     // `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
     import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
     import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import { ENDPOINT } from './ENDPOINT';
     
     // Register the plugins
     registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -42,9 +43,10 @@
     <div class="app">
     
         <FilePond bind:this={pond} {name}
-            server="http://localhost/imgs/{name}/{token}"
-            allowMultiple={true}
+            server="{ENDPOINT}/imgs/{name}/{token}"
             oninit={handleInit}
-            onaddfile={handleAddFile}/>
+            onaddfile={handleAddFile}
+            instantUpload={false}
+            />
     
     </div>
