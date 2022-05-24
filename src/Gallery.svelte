@@ -1,21 +1,28 @@
 <script lang="ts">
-	import Gallery from 'svelte-image-gallery'
-	import axios from 'axios'
-	import { ENDPOINT } from './ENDPOINT'
-	export let token: string;
-
-
-	const imgs = axios.get(`${ENDPOINT}/list/imgs/${token}`).then(res => console.log(res.data) as any || res.data.filter(e=>e != ".keep"));
-
+  import Gallery from "svelte-image-gallery";
+  import { cdn_endpoint, images, modal } from "./stores";
 </script>
 
-{#await imgs}
-    loading...
-{:then res} 
-    
-	<Gallery gap="10" maxColumnWidth="200">
-		{#each res as img}
-			<img src="{ENDPOINT}/imgs/{img}" alt="a"/>
-		{/each}
-	</Gallery>
-{/await}
+<Gallery gap="5" maxColumnWidth="200" on:click={(e) => modal.set(e.detail.alt)}>
+  {#each $images as id}
+    <img src="{$cdn_endpoint}/imgs/{id}?scale=0.5" alt={id} />
+  {/each}
+</Gallery>
+
+<style>
+  img {
+    background-color: var(--accent-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 100ms;
+    user-select: none;
+  }
+
+  img:hover {
+    opacity: 0.8;
+  }
+
+  img:active {
+    opacity: 1;
+  }
+</style>
